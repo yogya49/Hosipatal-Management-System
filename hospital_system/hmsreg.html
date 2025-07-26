@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Book Appointment - Saakshi Hospital</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #f4f6f9;
+      font-family: 'Segoe UI', sans-serif;
+    }
+    .form-section {
+      max-width: 600px;
+      margin: 50px auto;
+      background: white;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <div class="form-section">
+    <h2 class="text-center mb-4">Book Appointment</h2>
+    <form id="appointmentForm">
+      <div class="mb-3">
+        <label class="form-label">Full Name</label>
+        <input type="text" class="form-control" id="name" required>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Age</label>
+        <input type="number" class="form-control" id="age" required>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Phone Number</label>
+        <input type="tel" class="form-control" id="phone" required>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Aadhaar Number</label>
+        <input type="text" class="form-control" id="aadhaar" maxlength="12" required>
+      </div>
+      <div class="mb-4">
+        <label class="form-label">Department</label>
+        <select class="form-select" id="department" required>
+          <option value="">-- Select Department --</option>
+          <option>Cardiology</option>
+          <option>Neurology</option>
+          <option>Orthopedics</option>
+          <option>Pediatrics</option>
+          <option>Oncology</option>
+          <option>Dermatology</option>
+          <option>Gynecology</option>
+          <option>Urology</option>
+          <option>ENT</option>
+          <option>General Surgery</option>
+        </select>
+      </div>
+      <button type="submit" class="btn btn-primary w-100">Book Appointment</button>
+    </form>
+
+    <!-- Payment Simulation -->
+    <div id="paymentSection" class="hidden mt-4 text-center">
+      <h5>Payment Required: ₹500</h5>
+      <button class="btn btn-success mt-3" onclick="makePayment()">Pay Now</button>
+    </div>
+
+    <!-- Bill + OP Number -->
+    <div id="billSection" class="hidden mt-5">
+      <h4 class="text-success">Appointment Confirmed!</h4>
+      <p><strong>OP Number:</strong> <span id="opNumber"></span></p>
+      <p><strong>Amount Paid:</strong> ₹500</p>
+      <p><strong>Department:</strong> <span id="selectedDept"></span></p>
+      <p><strong>Patient Name:</strong> <span id="patientName"></span></p>
+    </div>
+  </div>
+</div>
+
+<script>
+  const form = document.getElementById('appointmentForm');
+  const paymentSection = document.getElementById('paymentSection');
+  const billSection = document.getElementById('billSection');
+
+  form.addEventListener('submit', function(event) {
+    event.preventDefault();
+    form.classList.add('hidden');
+    paymentSection.classList.remove('hidden');
+  });
+
+  function makePayment() {
+    const name = document.getElementById('name').value;
+    const department = document.getElementById('department').value;
+    const opNumber = 'OP' + Math.floor(100000 + Math.random() * 900000);
+
+    document.getElementById('patientName').innerText = name;
+    document.getElementById('selectedDept').innerText = department;
+    document.getElementById('opNumber').innerText = opNumber;
+
+    paymentSection.classList.add('hidden');
+    billSection.classList.remove('hidden');
+  }
+</script>
+
+</body>
+</html>
